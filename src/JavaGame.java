@@ -2,6 +2,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.PrimitiveIterator.OfDouble;
+
 import javax.imageio.IIOImage;
 import javax.swing.JFrame;
 
@@ -18,19 +20,35 @@ public class JavaGame extends JFrame {
 			
 			int keyCode = e.getKeyCode();
 			if(keyCode == e.VK_LEFT) {
-				x-=5;
+				if(x <= 0) {
+					x = 0;
+				}
+				else
+				x += -5;
 			}
 			
 			if(keyCode == e.VK_RIGHT) {
-				x+=5;
+				if( x >= 480) {
+					x = 480;
+				}
+				else
+				x+= +5;
 			}
 			
 			if(keyCode == e.VK_UP) {
-				y-=5;
+				if(y <= 38) {
+					y = 38;
+				}
+				else	
+				y+= -5;
 			}
 			
 			if(keyCode == e.VK_DOWN) {
-				y+=5;
+				if (y >= 480) {
+					y = 480;
+				}
+				else
+				y+= +5;
 			}
 			
 		}
