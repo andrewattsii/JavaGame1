@@ -1,12 +1,12 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.PrimitiveIterator.OfDouble;
-
 import javax.imageio.IIOImage;
 import javax.swing.JFrame;
-
 
 
 public class JavaGame extends JFrame {
@@ -14,6 +14,7 @@ public class JavaGame extends JFrame {
 	int x , y;
 	private Image dbImage;
 	private Graphics dbg;
+	Font font = new Font("Ariel", Font.BOLD, 30);
 	
 	public class AL extends KeyAdapter{
 		public void keyPressed(KeyEvent e) {
@@ -65,6 +66,7 @@ public class JavaGame extends JFrame {
 		setSize(500, 500);
 		setResizable(false);
 		setVisible(true);
+		setBackground(Color.yellow);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		x = 150;
@@ -79,6 +81,8 @@ public class JavaGame extends JFrame {
 	}
 	
 	public void paintComponent(Graphics g) {
+		g.setFont(font);
+		g.drawString("Game", 190, 100);
 		g.fillOval(x, y, 15, 15);
 		
 		repaint();
