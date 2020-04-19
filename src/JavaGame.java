@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.PrimitiveIterator.OfDouble;
 import javax.imageio.IIOImage;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 
@@ -15,6 +16,7 @@ public class JavaGame extends JFrame {
 	private Image dbImage;
 	private Graphics dbg;
 	Font font = new Font("Ariel", Font.BOLD, 30);
+	Image sword ; 
 	
 	public class AL extends KeyAdapter{
 		public void keyPressed(KeyEvent e) {
@@ -61,6 +63,10 @@ public class JavaGame extends JFrame {
 	}
 
 	public JavaGame() {
+		ImageIcon i = new ImageIcon("C:/Users/andre/eclipse-workspace/FirstGame/src/fox.png");
+		sword = i.getImage();
+				
+		
 		addKeyListener(new AL());
 		setTitle("Java Game");
 		setSize(500, 500);
@@ -84,6 +90,7 @@ public class JavaGame extends JFrame {
 		g.setFont(font);
 		g.drawString("Game", 190, 100);
 		g.fillOval(x, y, 15, 15);
+		g.drawImage(sword, x, y, this);
 		
 		repaint();
 	}
