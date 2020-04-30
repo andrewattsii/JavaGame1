@@ -1,3 +1,5 @@
+import org.omg.PortableServer.THREAD_POLICY_ID;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -10,54 +12,92 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 
-public class JavaGame extends JFrame {
-	
-	int x , y;
+public class JavaGame extends JFrame implements Runnable{
+
+
+	int x , y, xDirection, yDirection;
 	private Image dbImage;
 	private Graphics dbg;
 	Font font = new Font("Ariel", Font.BOLD, 30);
-	Image sword ; 
-	
+	Image sword ;
+
+	public void run(){
+		try{
+			while(true);
+			move();
+			Thread.sleep(500);
+
+		}
+		catch (Exception e){
+			System.out.println("Error");
+		}
+	}
+	public void move(){
+		x += xDirection;
+		y += yDirection;
+		if(x <= 0){
+			x = 0;
+		}
+		if(x >= 200){
+			x = 200;
+		}
+		if(y <= 50){
+			y = 50;
+		}
+		if(y >= 250){
+			y = 250;
+		}
+
+	}
+	public void setXDirection(int xdir){
+		xDirection = xdir;
+	}
+	public void setYDirection(int ydir){
+		yDirection = ydir;
+	}
 	public class AL extends KeyAdapter{
 		public void keyPressed(KeyEvent e) {
 			
 			int keyCode = e.getKeyCode();
 			if(keyCode == e.VK_LEFT) {
-				if(x <= 0) {
-					x = 0;
-				}
-				else
-				x += -5;
+				setXDirection(-1);
 			}
-			
+
 			if(keyCode == e.VK_RIGHT) {
-				if( x >= 480) {
-					x = 480;
-				}
-				else
-				x+= +5;
+				setXDirection(+1);
 			}
-			
+
 			if(keyCode == e.VK_UP) {
-				if(y <= 38) {
-					y = 38;
-				}
-				else	
-				y+= -5;
+				setYDirection(-1);
+
 			}
-			
+
 			if(keyCode == e.VK_DOWN) {
-				if (y >= 480) {
-					y = 480;
-				}
-				else
-				y+= +5;
+				setYDirection(+1);
+
 			}
 			
 		}
 		
 		public void keyReleased(KeyEvent e) {
-			
+			int keyCode = e.getKeyCode();
+			if(keyCode == e.VK_LEFT) {
+				setXDirection(0);
+			}
+
+			if(keyCode == e.VK_RIGHT) {
+				setXDirection(0);
+			}
+
+			if(keyCode == e.VK_UP) {
+				setYDirection(0);
+
+			}
+
+			if(keyCode == e.VK_DOWN) {
+				setYDirection(0);
+
+			}
 		}
 		
 	}
@@ -96,6 +136,9 @@ public class JavaGame extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new JavaGame();
+		JavaGame boom = new JavaGame();
+		//threads
+		Thread t1 = new Thread(boom);
+		t1.start();
 	}
 }
